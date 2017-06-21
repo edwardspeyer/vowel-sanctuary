@@ -60,20 +60,20 @@ def bits(n)
 end
 
 Help = <<'...'
-vowels: print Unicode glyphs that look like latin vowels
+vowel-sanctuary: print Unicode glyphs that look like latin vowels
 
-Two strings are printed, with their entropies prefixed:
+Two strings are printed, with their entropies suffixed:
 
-  # vowels
-  40 bits  ӀꓰАꓰОӀӀІΑЕΑАА
-  80 bits  ΕΙΕӀꓰЕꓰΑІӀӀАꓰОӀΕΙЕІЕІΙΕІΟ
+  $ vowel-sanctuary | cat
+  ӀꓰАꓰОӀӀІΑЕΑАА (40b)
+  ΕΙΕӀꓰЕꓰΑІӀӀАꓰОӀΕΙЕІЕІΙΕІΟ (80b)
 
 
 Closer inspection reveals that the vowels are not what they seem:
 
-  # vowels | cat -vet
-  40 bits  -^P-^P-^Y-^Q-^S-^U-^@-^@-^U-^_-^_-^@-^Q$
-  80 bits  -^Q-^^-^_-^U-^Y-^Q-^S-^Y-^Q-^U-^U-^S-^P-^U-^F-^U-^F-^_-^F-^Y-^^-^Q-^_-^@-^Y$
+  $ vowel-sanctuary | cat -vet
+  -^Y-^S-^Y-^^-^F-^U-^S-^P-^_-^P-^U-^U-^_ (40b)$
+  -^Y-^S-^Q-^@-^U-^^-^U-^U-^Y-^U-^S-^U-^Q-^U-^^-^P-^@-^P-^^-^U-^S-^P-^U-^S-^S (80b)$
 
 ...
 
