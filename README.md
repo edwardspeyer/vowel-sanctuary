@@ -3,10 +3,12 @@
 The owls will whisper a unique password that looks like it is upper-case ASCII,
 _but which is actually made of Greek, Coptic, and Cyrillic Unicode!_
 
-![OWLS](https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/screenshot.png)
+<img src="https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/screenshot.png" width="50%">
 
-A photograph, screenshot, or brain-memory can be created of the password
-but it won't be of any use because the passwords characters are ambiguous.
+To a certain extent, depending on typeface and rendering,
+an adversary can create a photograph, screenshot, or brain-memory of the password and
+it will be of little use to them.
+The unicode values of the glyphs are ambiguous under visual inspection.
 
 The entropy of the password is printed.
 The entropy of the visual ambiguity is substantially less,
