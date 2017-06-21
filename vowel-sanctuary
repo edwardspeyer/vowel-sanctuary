@@ -67,7 +67,7 @@ def hoot(message)
     "  " + brown + arml + ')_)' + armr,
     "   " + yellow + '" " ',
   ]
-  
+
   bubble = [
     blue + " ╭" + '─' * message.size   + "╮",
     blue + "╶┤" + off + message + blue + "│",
@@ -80,20 +80,34 @@ def hoot(message)
 end
 
 Help = <<'...'
-vowel-sanctuary: print Unicode glyphs that look like latin vowels
+vowel-sanctuary: print a Unicode password that looks like vowels
 
-Two strings are printed, with their entropies suffixed:
+Two strings are printed...
 
   $ vowel-sanctuary | cat
-  ӀꓰАꓰОӀӀІΑЕΑАА (40b)
-  ΕΙΕӀꓰЕꓰΑІӀӀАꓰОӀΕΙЕІЕІΙΕІΟ (80b)
+  ОΟӀΙΑОΕΑІЕΑΑА (40⚄ 15☭)
+  ЕӀЕꓰӀΟΙΙЕЕΑАΕꓰІΑΟІΑꓰΑАӀΕӀΑꓰꓰΑ (96⚄ 40☭)
 
+...with their indicators of entropy appended:
+
+  Actual Entropy (⚄):
+    The entropy of the password if it has never been seen, the
+    usual meaning of password entropy.
+
+  Visual Entropy (☭):
+    The entropy of your password if someone has spied on you over
+    your shoulder, and knows which homoglyphs were used in each
+    position, but doesn't know the actual glyphs used.  For
+    non-vowel-sanctuary passwords, this entropy is 0.
+
+The first has an entropy of 40+ bits; the second has a _visual_
+entropy of 40+ bits.
 
 Closer inspection reveals that the vowels are not what they seem:
 
   $ vowel-sanctuary | cat -vet
-  -^Y-^S-^Y-^^-^F-^U-^S-^P-^_-^P-^U-^U-^_ (40b)$
-  -^Y-^S-^Q-^@-^U-^^-^U-^U-^Y-^U-^S-^U-^Q-^U-^^-^P-^@-^P-^^-^U-^S-^P-^U-^S-^S (80b)$
+  -^U-^@-^@-^@-^Q-^S-^Y-^@-^S-^F-^P-^Y-^^ (40-^ZM-^D 18-^X)$
+  -^U-^U-^_-^F-^P-^_-^P-^Q-^U-^_-^U-^U-^U-^F-^P-^@-^Y-^....
 
 ...
 
