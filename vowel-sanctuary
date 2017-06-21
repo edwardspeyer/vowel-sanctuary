@@ -11,28 +11,30 @@ Homoglyphs = [
 
 All = Homoglyphs.flatten
 
+Password = Struct.new(:glyphs, :entropy, :visible)
+
 def pick(ar)
   index = SecureRandom.random_number(ar.size)
   ar[index]
 end
 
 def gen
-  pw = ''
-  s = 0.0
-  v = 0.0
+  pw = Password.new([], 0.0, 0.0)
   100.times do
-    yield pw, s, v
+    yield pw
     glyph = pick(All)
-    set = Homoglyphs.find{ |s| s.include?(glyph) }
-    pw += glyph
-    s += Math.log(All.size, 2)
-    v += Math.log(set.size, 2)
+    set = Homoglyphs.find do |set|
+      set.include?(glyph)
+    end
+    pw.glyphs << glyph
+    pw.entropy += Math.log(All.size, 2)
+    pw.visible += Math.log(set.size, 2)
   end
   raise 'ELOOP'
 end
 
-def hoot(s)
-  return puts s unless STDOUT.tty?
+def hoot(message)
+  return puts message unless STDOUT.tty?
 
   case `tput colors`.strip.to_i
   when 256
@@ -67,23 +69,14 @@ def hoot(s)
   ]
   
   bubble = [
-    blue + " ╭" + '─' * s.size   + "╮",
-    blue + "╶┤" + off + s + blue + "│",
-    blue + " ╰" + '─' * s.size   + "╯",
+    blue + " ╭" + '─' * message.size   + "╮",
+    blue + "╶┤" + off + message + blue + "│",
+    blue + " ╰" + '─' * message.size   + "╯",
     "",
   ]
 
   puts owl.zip(bubble).map{ |o,b| o + b }
   print off
-end
-
-def bits(n)
-  gen do |p, s, v|
-    if s >= n
-      hoot '%s (%db %dv %dc)' % [p, n, v, p.size]
-      break
-    end
-  end
 end
 
 Help = <<'...'
@@ -109,5 +102,18 @@ if ARGV.join.include?('-h')
   exit
 end
 
-bits 40
-bits 80
+target = 40
+
+gen do |pw|
+  if pw.entropy >= target
+    hoot '%s (%d⚄ %d☭)' % [pw.glyphs.join, target, pw.visible]
+    break
+  end
+end
+
+gen do |pw|
+  if pw.visible >= target
+    hoot '%s (%d⚄ %d☭)' % [pw.glyphs.join, pw.entropy, target]
+    break
+  end
+end
