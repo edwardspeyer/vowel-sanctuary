@@ -14,4 +14,4 @@ but _it should be enough!_
 
 # /COOPER/COOPER/COOPER/COOPER/
 
-[![THE OWLS ARE NOT WHAT THEY SEEM](https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/youtube.jpg)](https://youtu.be/mbi7rq-TSk8?t=114)
+<a href="https://youtu.be/mbi7rq-TSk8?t=114"><img src="https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/youtube.jpg" alt="THE OWLS ARE NOT WHAT THEY SEEM" width="640"></a>
