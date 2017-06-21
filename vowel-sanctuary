@@ -30,6 +30,8 @@ def hoot(s)
     brown   = "\e[031m"
     yellow  = "\e[032m"
     off     = "\e[0m"
+  when -1, 15, 16, 52, 64, 88
+    blue = brown = yellow = off = ''
   else
     blue = brown = yellow = off = ''
   end
