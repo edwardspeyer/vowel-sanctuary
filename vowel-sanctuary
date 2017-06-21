@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+
+require 'securerandom'
+
+Homoglyphs = %w{ Α А Ε Е ꓰ Ι І Ӏ Ο О }
+
+def gen
+  pw = ''
+  s = 0.0
+  100.times do
+    yield pw, s
+    index = SecureRandom.random_number(Homoglyphs.size)
+    pw += Homoglyphs[index]
+    s += Math.log(Homoglyphs.size, 2)
+  end
+  raise 'ELOOP'
+end
+
+def hoot(s)
+  return puts s unless STDOUT.tty?
+
+  blue    = "\e[038;5;68m"
+  brown   = "\e[038;5;%dm" % [ 94, 124, 166, 172][rand(3)]
+  yellow  = "\e[038;5;%dm" % [ 34, 113, 190, 227][rand(3)]
+  off     = "\e[0m"
+
+  eye = "o@^-"[rand(4)]
+  beak = ",.o"[rand(2)]
+  case rand(3)
+  when 0 then arml, armr = '/', '\\'
+  when 1 then arml, armr = '^', '^'
+  when 2 then arml, armr = '=', '='
+  end
+
+  owl = [
+    "       ",
+    "  " + brown + '{' + yellow + eye + beak + eye + brown + '}',
+    "  " + brown + arml + ')_)' + armr,
+    "   " + yellow + '" " ',
+  ]
+  
+  bubble = [
+    blue + " ╭" + '─' * s.size   + "╮",
+    blue + "╶┤" + off + s + blue + "│",
+    blue + " ╰" + '─' * s.size   + "╯",
+    "",
+  ]
+
+  puts owl.zip(bubble).map{ |o,b| o + b }
+  print off
+end
+
+def bits(n)
+  gen do |p, s|
+    if s >= n
+      hoot '%s (%db)' % [p, n]
+      break
+    end
+  end
+end
+
+Help = <<'...'
+vowels: print Unicode glyphs that look like latin vowels
+
+Two strings are printed, with their entropies prefixed:
+
+  # vowels
+  40 bits  ӀꓰАꓰОӀӀІΑЕΑАА
+  80 bits  ΕΙΕӀꓰЕꓰΑІӀӀАꓰОӀΕΙЕІЕІΙΕІΟ
+
+
+Closer inspection reveals that the vowels are not what they seem:
+
+  # vowels | cat -vet
+  40 bits  -^P-^P-^Y-^Q-^S-^U-^@-^@-^U-^_-^_-^@-^Q$
+  80 bits  -^Q-^^-^_-^U-^Y-^Q-^S-^Y-^Q-^U-^U-^S-^P-^U-^F-^U-^F-^_-^F-^Y-^^-^Q-^_-^@-^Y$
+
+...
+
+if ARGV.join.include?('-h')
+  puts Help
+  exit
+end
+
+bits 40
+bits 80
