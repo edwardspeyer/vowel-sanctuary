@@ -3,7 +3,7 @@
 The owls will whisper a unique password that looks like it is upper-case ASCII,
 _but which is actually made of Greek, Coptic, and Cyrillic Unicode!_
 
-<img src="https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/screenshot.png" width="50%">
+<img src="https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/screenshot.png" width="450">
 
 To a certain extent, depending on typeface and rendering,
 an adversary can create a photograph, screenshot, or brain-memory of the password and
