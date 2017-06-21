@@ -2,16 +2,31 @@
 
 require 'securerandom'
 
-Homoglyphs = %w{ Α А Ε Е ꓰ Ι І Ӏ Ο О }
+Homoglyphs = [
+  %w{ Α А },
+  %w{ Ε Е ꓰ },
+  %w{ Ι І Ӏ },
+  %w{ Ο О },
+]
+
+All = Homoglyphs.flatten
+
+def pick(ar)
+  index = SecureRandom.random_number(ar.size)
+  ar[index]
+end
 
 def gen
   pw = ''
   s = 0.0
+  v = 0.0
   100.times do
-    yield pw, s
-    index = SecureRandom.random_number(Homoglyphs.size)
-    pw += Homoglyphs[index]
-    s += Math.log(Homoglyphs.size, 2)
+    yield pw, s, v
+    glyph = pick(All)
+    set = Homoglyphs.find{ |s| s.include?(glyph) }
+    pw += glyph
+    s += Math.log(All.size, 2)
+    v += Math.log(set.size, 2)
   end
   raise 'ELOOP'
 end
@@ -63,9 +78,9 @@ def hoot(s)
 end
 
 def bits(n)
-  gen do |p, s|
+  gen do |p, s, v|
     if s >= n
-      hoot '%s (%db)' % [p, n]
+      hoot '%s (%db %dv %dc)' % [p, n, v, p.size]
       break
     end
   end
