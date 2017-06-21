@@ -1,10 +1,17 @@
 # vowel-sanctuary
 
-The owls will speak a unique password that looks like upper-case ASCII,
-but which is actually composed of homoglyphs from other Unicode code pages.
+The owls will whisper a unique password that looks like it is upper-case ASCII,
+_but which is actually made of Greek, Coptic, and Cyrillic Unicode!_
 
-A photograph, screenshot, or visual memory can be created of the password
-but it won't be of any use because you cannot visually tell of which Unicode
-characters the password consists.
+![OWLS](https://raw.githubusercontent.com/edwardspeyer/vowel-sanctuary/master/images/screenshot.png)
 
-[![THE OWLS ARE NOT WHAT THEY SEEM](https://img.youtube.com/vi/mbi7rq-TSk8/0.jpg)](https://www.youtube.com/watch?v=mbi7rq-TSk8)
+A photograph, screenshot, or brain-memory can be created of the password
+but it won't be of any use because the passwords characters are ambiguous.
+
+The entropy of the password is printed.
+The entropy of the visual ambiguity is substantially less,
+but _it should be enough!_
+
+# /COOPER/COOPER/COOPER/COOPER/
+
+[![THE OWLS ARE NOT WHAT THEY SEEM](https://img.youtube.com/vi/mbi7rq-TSk8/0.jpg)](https://youtu.be/mbi7rq-TSk8?t=114)
