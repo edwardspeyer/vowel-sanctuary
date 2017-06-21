@@ -16,11 +16,10 @@ whether you were using A, Α, or А.  Each vowel that is used comes
 from a set of two or three choices spread over different Unicode
 code pages (character sets.)
 
-The regular entropy of the password is printed, as well as the
-visual entropy of the password.  This second value is the entropy
-as if an adversary had seen the password and known which possible
-homoglyphs could have been used in each position, but still
-didn't know the actual glyphs used.
+The regular entropy of the password is printed (⚄), as well as the
+entropy of the password if you are being spied on (☭), namely where
+an adversary _does know_ which sets of homoglyphs had been used in
+each position, but _doesn't know_ the actual glyphs used.
 
 # /COOPER/COOPER/COOPER/COOPER/
 
