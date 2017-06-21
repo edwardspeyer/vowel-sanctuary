@@ -19,10 +19,20 @@ end
 def hoot(s)
   return puts s unless STDOUT.tty?
 
-  blue    = "\e[038;5;68m"
-  brown   = "\e[038;5;%dm" % [ 94, 124, 166, 172][rand(3)]
-  yellow  = "\e[038;5;%dm" % [ 34, 113, 190, 227][rand(3)]
-  off     = "\e[0m"
+  case `tput colors`.strip.to_i
+  when 256
+    blue    = "\e[038;5;68m"
+    brown   = "\e[038;5;%dm" % [ 94, 124, 166, 172][rand(3)]
+    yellow  = "\e[038;5;%dm" % [ 34, 113, 190, 227][rand(3)]
+    off     = "\e[0m"
+  when 8
+    blue    = "\e[034m"
+    brown   = "\e[031m"
+    yellow  = "\e[032m"
+    off     = "\e[0m"
+  else
+    blue = brown = yellow = off = ''
+  end
 
   eye = "o@^-"[rand(4)]
   beak = ",.o"[rand(2)]
